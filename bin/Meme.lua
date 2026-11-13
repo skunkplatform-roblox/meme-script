@@ -1,10 +1,14 @@
+--[[
+
+Change to R6 avatar to use this script.
+
+]]
+
 game.Players.PlayerAdded:Connect(function(plr)
 	plr.CharacterAdded:Connect(function(char)
-		local desc=game:GetService("Players"):GetHumanoidDescriptionFromUserId(plr.UserId)
-		char.Humanoid:ApplyDescription(desc)
 		local h:Humanoid=char:WaitForChild("Humanoid")
 		h.Died:Connect(function()
-			local meme=math.random(1,6)
+			local meme=math.random(1,8)
 			if meme==1 then
 				local sound=Instance.new("Sound")
 				sound.SoundId="rbxassetid://89393995197473"
@@ -140,6 +144,86 @@ game.Players.PlayerAdded:Connect(function(plr)
 						bv:Destroy()
 					end)
 				end)
+			elseif meme==7 then
+				local sound=Instance.new("Sound")
+				local randomId=math.random(1,6)
+				if randomId==1 then
+					sound.SoundId="rbxassetid://137424755442988"
+				elseif randomId==2 then
+					sound.SoundId="rbxassetid://128179254329383"
+				elseif randomId==3 then
+					sound.SoundId="rbxassetid://129625339376248"
+				elseif randomId==4 then
+					sound.SoundId="rbxassetid://92122169815761"
+				elseif randomId==5 then
+					sound.SoundId="rbxassetid://117856770378427"
+				elseif randomId==6 then
+					sound.SoundId="rbxassetid://122164974573593"
+				end
+				spawn(function()
+					spawn(function()
+						local bv=Instance.new("BodyVelocity")
+						bv.Velocity=Vector3.new(0,2000,0)
+						bv.Parent=char.Torso
+						task.wait(1)
+						bv:Destroy()
+					end)
+					spawn(function()
+						local bv=Instance.new("BodyVelocity")
+						bv.Velocity=Vector3.new(0,2000,0)
+						bv.Parent=char.Head
+						task.wait(1)
+						bv:Destroy()
+					end)
+					spawn(function()
+						local bv=Instance.new("BodyVelocity")
+						bv.Velocity=Vector3.new(2000,0,0)
+						bv.Parent=char["Left Leg"]
+						task.wait(1)
+						bv:Destroy()
+					end)
+					spawn(function()
+						local bv=Instance.new("BodyVelocity")
+						bv.Velocity=Vector3.new(-2000,0,0)
+						bv.Parent=char["Right Leg"]
+						task.wait(1)
+						bv:Destroy()
+					end)
+					spawn(function()
+						local bv=Instance.new("BodyVelocity")
+						bv.Velocity=Vector3.new(0,0,2000)
+						bv.Parent=char["Right Arm"]
+						task.wait(1)
+						bv:Destroy()
+					end)
+					spawn(function()
+						local bv=Instance.new("BodyVelocity")
+						bv.Velocity=Vector3.new(0,0,-2000)
+						bv.Parent=char["Left Arm"]
+						task.wait(1)
+						bv:Destroy()
+					end)
+				end)
+			elseif meme==8 then
+				local sound=Instance.new("Sound")
+				sound.SoundId="rbxassetid://110110344375165"
+				sound.Parent=plr.Character.HumanoidRootPart
+				sound.Volume=1
+				sound:Play()
+				for _,v in pairs(char:GetDescendants()) do
+					if v:IsA("Motor6D") then
+						local a0,a1=Instance.new("Attachment"),Instance.new("Attachment")
+						a0.CFrame=v.C0
+						a1.CFrame=v.C1
+						a0.Parent=v.Part0
+						a1.Parent=v.Part1
+						local bsc=Instance.new("BallSocketConstraint")
+						bsc.Attachment0=a0
+						bsc.Attachment1=a1
+						bsc.Parent=v.Part0
+						v:Destroy()
+					end
+				end
 			end
 		end)
 	end)
